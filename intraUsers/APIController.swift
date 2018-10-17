@@ -61,8 +61,38 @@ class APIController: NSObject {
                 do {
                     let dic = try JSONSerialization.jsonObject(with: data, options: []) as! [String:Any]
                     if dic["login"] != nil {
-                        self.userData?.login = dic["login"]! as! String
-                        print(self.userData?.login)
+                        let curs = dic["cursus_users"] as! NSArray
+                        let cursus_users =  curs[0] as! NSDictionary
+//                        let skills = cursus_users["skills"] as! NSArray
+//                        let skill = skills[0] as! NSDictionary
+                        
+                        self.userData = UserData(
+                            id: dic["id"]! as! Int,
+                            email: dic["email"]! as! String,
+                            login: dic["login"]! as! String,
+                            first_name: dic["first_name"]! as! String,
+                            last_name: dic["last_name"]! as! String,
+                            phone: dic["phone"]! as! String,
+                            displayname: dic["displayname"]! as! String,
+                            image_url: dic["image_url"]! as! String,
+                            correction_point: dic["correction_point"]! as! Int,
+                            pool_month: dic["pool_month"]! as! String,
+                            pool_year: dic["pool_year"]! as! String,
+                            location: dic["location"]! as? String,
+                            wallet: dic["wallet"]! as! Int,
+                            projects_users: nil,
+                            achievements: nil,
+                            cursus_users: Cursus(
+                                grade: cursus_users["grade"]! as! String,
+                                level: cursus_users["level"]! as! Double,
+                                skills: nil,
+                                id: cursus_users["id"]! as! Int,
+                                begin_at: cursus_users["begin_at"]! as? NSDate,
+                                end_at: cursus_users["end_at"]! as? NSDate,
+                                has_coalition: cursus_users["has_coalition"]! as! Bool
+                            )
+                        )
+                        print("level = \(self.userData!.cursus_users.level)")
                     }
                 }
                 catch (let error) {

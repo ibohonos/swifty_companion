@@ -21,7 +21,7 @@ struct UserData : CustomStringConvertible {
     var pool_month: String
     var pool_year: String
     var location: String?
-    var walvar: Int
+    var wallet: Int
     var projects_users: [Projects]?
     var achievements: [Achievements]?
     var cursus_users: Cursus
@@ -61,7 +61,7 @@ struct Achievements: CustomStringConvertible {
 struct Cursus: CustomStringConvertible {
     var grade: String
     var level: Double
-    var skills: [Skills]
+    var skills: [Skills]?
     var id: Int
     var begin_at: NSDate?
     var end_at: NSDate?
