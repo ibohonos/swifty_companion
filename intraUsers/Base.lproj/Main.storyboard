@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -82,7 +83,7 @@
                     <navigationItem key="navigationItem" title="Search" id="mJJ-3c-zfL"/>
                     <connections>
                         <outlet property="login" destination="u8r-O2-nJp" id="TaK-k8-gh1"/>
-                        <segue destination="66F-mq-thT" kind="show" identifier="loginSegue" id="SN7-vw-ogx"/>
+                        <segue destination="66F-mq-thT" kind="show" identifier="loginSegue" id="m7Z-Fq-9LW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J8p-AF-wpP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -92,19 +93,56 @@
         <!--User Table View Controller-->
         <scene sceneID="T7a-SQ-Gjc">
             <objects>
-                <tableViewController id="66F-mq-thT" customClass="UserTableViewController" customModule="intraUsers" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="searched" id="66F-mq-thT" customClass="UserTableViewController" customModule="intraUsers" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="aEO-KW-zQJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="userInfoCell" id="mJW-PY-tz6" customClass="UserInfoTableViewCell" customModule="intraUsers" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="userInfoCell" rowHeight="109" id="mJW-PY-tz6" customClass="UserInfoTableViewCell" customModule="intraUsers" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="109"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mJW-PY-tz6" id="SCw-4D-sxd">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="108.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J3s-kd-W41">
+                                            <rect key="frame" x="16" y="11" width="80" height="80"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="80" id="iZq-od-Nxh"/>
+                                                <constraint firstAttribute="height" constant="80" id="uCT-C1-41z"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Display name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qp7-UD-B6F">
+                                            <rect key="frame" x="104" y="11" width="255" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="login" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VWM-Lp-1BO">
+                                            <rect key="frame" x="104" y="40" width="255" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="qp7-UD-B6F" firstAttribute="leading" secondItem="J3s-kd-W41" secondAttribute="trailing" constant="8" id="3yb-RV-Wfg"/>
+                                        <constraint firstItem="VWM-Lp-1BO" firstAttribute="leading" secondItem="J3s-kd-W41" secondAttribute="trailing" constant="8" id="7Op-2q-oLp"/>
+                                        <constraint firstItem="J3s-kd-W41" firstAttribute="top" secondItem="SCw-4D-sxd" secondAttribute="topMargin" id="IIS-Cc-Fr5"/>
+                                        <constraint firstItem="qp7-UD-B6F" firstAttribute="top" secondItem="SCw-4D-sxd" secondAttribute="topMargin" id="IOF-rp-iIk"/>
+                                        <constraint firstItem="VWM-Lp-1BO" firstAttribute="trailing" secondItem="SCw-4D-sxd" secondAttribute="trailingMargin" id="LR9-DN-NI3"/>
+                                        <constraint firstItem="VWM-Lp-1BO" firstAttribute="top" secondItem="qp7-UD-B6F" secondAttribute="bottom" constant="8" id="O2k-tx-l3o"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="J3s-kd-W41" secondAttribute="bottom" constant="7" id="V0Q-TZ-5zg"/>
+                                        <constraint firstItem="J3s-kd-W41" firstAttribute="leading" secondItem="SCw-4D-sxd" secondAttribute="leadingMargin" id="wLf-PV-juf"/>
+                                        <constraint firstItem="qp7-UD-B6F" firstAttribute="trailing" secondItem="SCw-4D-sxd" secondAttribute="trailingMargin" id="zPM-8t-Vy9"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="ava" destination="J3s-kd-W41" id="Z5O-K6-xgE"/>
+                                    <outlet property="displayName" destination="qp7-UD-B6F" id="mIv-Mk-Fmh"/>
+                                    <outlet property="login" destination="VWM-Lp-1BO" id="b5P-St-98q"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -115,7 +153,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="COI-F2-SMN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1281" y="167"/>
+            <point key="canvasLocation" x="1280.8" y="166.8665667166417"/>
         </scene>
     </scenes>
     <resources>

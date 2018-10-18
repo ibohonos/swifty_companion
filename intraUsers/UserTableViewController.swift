@@ -10,6 +10,8 @@ import UIKit
 
 class UserTableViewController: UITableViewController {
 
+    var userData: UserData?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,23 +31,27 @@ class UserTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return 1
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "userInfoCell", for: indexPath) as! UserInfoTableViewCell
 
         // Configure the cell...
+        let data = try? Data(contentsOf: URL(string: (userData!.image_url))!)
+        cell.ava.image = UIImage(data: data!)
+        cell.displayName.text = userData!.displayname
+        cell.login.text = userData!.login
 
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.

@@ -34,16 +34,15 @@ struct UserData : CustomStringConvertible {
 struct Projects: CustomStringConvertible {
     var id: Int
     var occurrence: Int
-    var final_mark: Int
+    var final_mark: Int?
     var status: String
-    var validated: Bool
-    var current_team_id: Int
+    var validated: Bool?
     var project_name: String
-    var marked_at: NSDate
+    var marked_at: String?
     var marked: Bool
     
     public var description : String {
-        return "\(project_name)\n\(status)\n\(final_mark)\n\(validated)\n\(marked_at)"
+        return "\(project_name)\n\(status)\n\(String(describing: final_mark))\n\(String(describing: validated))\n\(String(describing: marked_at))"
     }
 }
 
@@ -63,8 +62,8 @@ struct Cursus: CustomStringConvertible {
     var level: Double
     var skills: [Skills]?
     var id: Int
-    var begin_at: NSDate?
-    var end_at: NSDate?
+    var begin_at: String?
+    var end_at: String?
     var has_coalition: Bool
     
     public var description : String {
