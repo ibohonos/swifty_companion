@@ -13,11 +13,9 @@ class APIController: NSObject {
     var UID: String = "025e43e98d6af22dba1b285cb92140c8b2f39e23169dcf9063036f60233edaa6"
     var SECRET: String = "2630b2488a5485bc4c93d831a0ffcf752665bfca6b00fa49150c9c9b0d2508d2"
     var userData: UserData?
-    let delegate: UIViewController!
-    let intraDelegate: APIIntraDelegate
+    var intraDelegate: APIIntraDelegate?
     
-    init(na: UIViewController, intra: APIIntraDelegate) {
-        self.delegate = na
+    public func setDelegate(intra: APIIntraDelegate?) {
         self.intraDelegate = intra
     }
     
@@ -44,6 +42,36 @@ class APIController: NSObject {
                     }
                 }
                 catch (let error) {
+                    print(error)
+                }
+            }
+        }
+        dataTask.resume()
+    }
+    
+    public func checkLogin(login: String, complitation: @escaping (_ retVal: Bool?) -> ()) {
+        let url = URL(string: "https://api.intra.42.fr/v2/users/\(login)")
+        let sessionConf = URLSessionConfiguration.default
+        let session = URLSession(configuration: sessionConf)
+        var request = URLRequest(url: url! as URL)
+        
+        request.httpMethod = "GET"
+        request.setValue("Bearer " + self.token!, forHTTPHeaderField: "Authorization")
+        
+        let dataTask = session.dataTask(with: request) {
+            (data, response, error) in
+            
+            if let error = error {
+                print(error.localizedDescription)
+            } else if let data = data {
+                do {
+                    let dic = try JSONSerialization.jsonObject(with: data, options: []) as! [String:Any]
+                    if dic["login"] != nil {
+                        complitation(true)
+                    } else {
+                        complitation(false)
+                    }
+                } catch (let error) {
                     print(error)
                 }
             }
@@ -123,7 +151,7 @@ class APIController: NSObject {
                             login: dic["login"]! as! String,
                             first_name: dic["first_name"]! as! String,
                             last_name: dic["last_name"]! as! String,
-                            phone: dic["phone"]! as! String,
+                            phone: dic["phone"] as? String,
                             displayname: dic["displayname"]! as! String,
                             image_url: dic["image_url"]! as! String,
                             correction_point: dic["correction_point"]! as! Int,
@@ -143,8 +171,11 @@ class APIController: NSObject {
                                 has_coalition: cursus_users["has_coalition"]! as! Bool
                             )
                         )
-                        self.intraDelegate.allUserInfo(info: self.userData!)
-                        self.delegate.performSegue(withIdentifier: "loginSegue", sender: self.delegate)
+                        
+                        DispatchQueue.main.async {
+                            self.intraDelegate!.allUserInfo(info: self.userData!)
+                        }
+                        
                     }
                 }
                 catch (let error) {

@@ -14,7 +14,7 @@ struct UserData : CustomStringConvertible {
     var login: String
     var first_name: String
     var last_name: String
-    var phone: String
+    var phone: String?
     var displayname: String
     var image_url: String
     var correction_point: Int
