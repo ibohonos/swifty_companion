@@ -124,16 +124,19 @@ class APIController: NSObject {
                                 newDate = dateFormatter.string(from: date2!)
                             }
                             
-                            allProjects.append(Projects(
-                                id: project["id"] as! Int,
-                                occurrence: project["occurrence"] as! Int,
-                                final_mark: project["final_mark"] as? Int,
-                                status: project["status"] as! String,
-                                validated: project["validated?"] as? Bool,
-                                project_name: nameProject["name"] as! String,
-                                marked_at: newDate,
-                                marked: project["marked"] as! Bool
-                            ))
+                            let pr = nameProject["parent_id"] as? Int
+                            if pr == nil {
+                                allProjects.append(Projects(
+                                    id: project["id"] as! Int,
+                                    occurrence: project["occurrence"] as! Int,
+                                    final_mark: project["final_mark"] as? Int,
+                                    status: project["status"] as! String,
+                                    validated: project["validated?"] as? Bool,
+                                    project_name: nameProject["name"] as! String,
+                                    marked_at: newDate,
+                                    marked: project["marked"] as! Bool
+                                ))
+                            }
                         }
                         
                         for achievement in achievements as! [[String : Any]] {

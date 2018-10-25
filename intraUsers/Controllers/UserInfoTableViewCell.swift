@@ -20,6 +20,14 @@ class UserInfoTableViewCell: UITableViewCell {
     @IBOutlet weak var level: UILabel!
     @IBOutlet weak var levelBar: UIProgressView!
     
+    @IBOutlet weak var skillName: UILabel!
+    @IBOutlet weak var skillLevel: UILabel!
+    
+    @IBOutlet weak var projectName: UILabel!
+    @IBOutlet weak var projectMark: UILabel!
+    
+    @IBOutlet weak var achName: UILabel!
+    @IBOutlet weak var achDesc: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
