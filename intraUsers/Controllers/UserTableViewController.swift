@@ -113,7 +113,7 @@ class UserTableViewController: UITableViewController, APIIntraDelegate {
                 cell.projectName.text = userData!.projects_users![indexPath.row].project_name
                 if userData!.projects_users![indexPath.row].status == "finished" {
                     cell.projectMark.text = String(describing: userData!.projects_users![indexPath.row].final_mark!)
-                } else if userData!.projects_users![indexPath.row].status == "in_progress" || userData!.projects_users![indexPath.row].status == "parent" {
+                } else {
                     cell.projectMark.text = "None"
                 }
                 
